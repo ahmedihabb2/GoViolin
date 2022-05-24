@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goviolin
+spec:
+  selector:
+    matchLabels:
+      app: goviolin
+  template:
+    metadata:
+      labels:
+        app: goviolin
+    spec:
+      containers:
+      - name: goviolin
+        image: ahmedihab/goviolin
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
