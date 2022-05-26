@@ -7,6 +7,7 @@ pipeline{
         DOCKER_IMAGE = "ahmedihab/goviolin"
         DOCKER_TAG = "latest"
         GO114MODULE = 'on'
+        REPORT_EMAIL = "ahmedbaz14@gmail.com"
         GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
         }
     stages {
@@ -78,13 +79,13 @@ pipeline{
     post {
         success {
             echo "Pipeline completed successfully"
-            mail to: "ahmedbaz14@gmail.com",
+            mail to: ${REPORT_EMAIL},
             subject: "GoViolin Pipeline",
             body: "Pipeline completed successfully"
         }
         failure {
             echo "Pipeline failed"
-            mail to: "ahmedbaz14@gmail.com",
+            mail to: ${REPORT_EMAIL},
             subject: "GoViolin Pipeline",
             body: "Pipeline failed ... Please Check logs"
         }
