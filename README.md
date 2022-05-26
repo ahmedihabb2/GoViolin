@@ -3,6 +3,8 @@
 GoViolin is a web app written in Go that helps with violin practice.
 This repo contains the most important infra files needed to deploy this web app
 
+view website from : ec2-54-83-200-211.compute-1.amazonaws.com
+
 ## Pre-Requisites
 To run the docker file locally: 
 
