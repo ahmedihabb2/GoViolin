@@ -10,6 +10,7 @@ pipeline{
         GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
         }
     stages {
+
         stage ('Run Go tests') {
             steps{
                 echo "============Running go tests==========="
@@ -20,34 +21,36 @@ pipeline{
                     """     
                 }
                 }
-        post {
-            success {
-                echo "Tests passed"
-            }
-            failure {
-                echo "Tests failed"
-            }
+            post {
+                success {
+                    echo "Tests passed"
+                }
+                failure {
+                    echo "Tests failed"
+                }
 
-        }
+            }
         }
 
         stage ('Build Dockerfile'){
+
             steps{
                 echo "============Building Dockerfile==========="
             sh 'docker build -t $DOCKER_IMAGE:$DOCKER_TAG .'
             }
-        post {
-            success {
-                echo "Docker image built successfully"
-            }
-            failure {
-                echo "Docker image build failed"
-            }
+            post {
+                success {
+                    echo "Docker image built successfully"
+                }
+                failure {
+                    echo "Docker image build failed"
+                }
 
-        }
+            }
         }
 
         stage ('Push Docker image'){
+
             steps{
                 echo "============Pushing Docker image==========="
              withCredentials([usernamePassword(credentialsId: 'Dockersecret', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')])
@@ -58,15 +61,16 @@ pipeline{
                     """ 
                 }
             }
-        post {
-            success {
-                echo "Docker image pushed successfully"
-            }
-            failure {
-                echo "Failed to push the image"
-            }
+            post {
+                success {
+                    echo "Docker image pushed successfully"
+                }
+                failure {
+                    echo "Failed to push the image"
+                }
 
-        }
+            }
+            
         }
 
 
