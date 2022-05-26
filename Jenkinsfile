@@ -79,13 +79,13 @@ pipeline{
     post {
         success {
             echo "Pipeline completed successfully"
-            mail to: ${REPORT_EMAIL},
+            mail to: $REPORT_EMAIL,
             subject: "GoViolin Pipeline",
             body: "Pipeline completed successfully"
         }
         failure {
             echo "Pipeline failed"
-            mail to: ${REPORT_EMAIL},
+            mail to: $REPORT_EMAIL,
             subject: "GoViolin Pipeline",
             body: "Pipeline failed ... Please Check logs"
         }
