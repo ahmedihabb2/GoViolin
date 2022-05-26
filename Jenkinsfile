@@ -3,7 +3,8 @@ pipeline{
     environment {
         DOCKER_IMAGE = "ahmedihab/goviolin"
         DOCKER_TAG = "latest"
-        root = tool type: 'go', name: 'Go-v1.18.2' 
+        root = tool type: 'go', name: 'Go-v1.18.2'
+        GO111MODULE = 'on' 
         
         }
             tools {
