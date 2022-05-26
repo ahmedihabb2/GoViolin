@@ -13,7 +13,7 @@ pipeline{
     stages {
         stage ('Run Go tests') {
             steps{
-                echo "Running go tests"
+                echo "============Running go tests==========="
                 withEnv(["PATH+GO=${GOPATH}/bin"]) {
                     sh """
                         go version
