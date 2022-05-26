@@ -3,7 +3,5 @@
 
 *.exe
 GoViolin
-go.mod
-go.sum
 main
 

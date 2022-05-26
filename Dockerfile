@@ -8,7 +8,7 @@ COPY .   /app
 # set working directory to /app
 WORKDIR /app      
 
-RUN go mod init     
+RUN go mod init  github.com/Rosalita/GoViolin
 # build the app
 RUN go build -o main .  
 
