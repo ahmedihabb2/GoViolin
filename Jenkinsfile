@@ -10,10 +10,13 @@ pipeline{
             steps{
                 echo "Running go tests"
                 withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
-                    sh 'go mod init '
-                    sh 'go mod tidy'
-                    sh 'go mod vendor'
-                    sh 'go test  ./...'
+                    sh """
+                        go version
+                        go mod init 
+                        go mod tidy
+                        go mod vendor
+                        go test  ./...
+                    """     
                 }
                 }
         post {
