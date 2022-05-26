@@ -17,7 +17,7 @@ pipeline{
                 withEnv(["PATH+GO=${GOPATH}/bin"]) {
                     sh """
                         go version
-                        go mod init 
+                        go mod init github.com/Rosalita/GoViolin
                         go mod tidy
                         go mod vendor
                         go test  ./...
