@@ -7,10 +7,12 @@ pipeline{
     stages {
         stage ('Run Go tests') {
             steps{
+                withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin:${HOME}/go/bin"]) {
                 sh 'go mod init '
                 sh 'go mod tidy'
                 sh 'go mod vendor'
                 sh 'go test  ./...'
+                }
             }
         post {
             success {
