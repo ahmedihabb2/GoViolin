@@ -1,8 +1,12 @@
 pipeline{
     agent any
+    tools {
+        go 'Go-v1.18.2'
+    }
     environment {
         DOCKER_IMAGE = "ahmedihab/goviolin"
         DOCKER_TAG = "latest"
+        GO111MODULE = 'on'
         root = tool type: 'go', name: 'Go-v1.18.2'
         }
     stages {
@@ -12,8 +16,6 @@ pipeline{
                 withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
                     sh """
                         go version
-                        pwd 
-                        ls
                         go mod init 
                         go mod tidy
                         go mod vendor
