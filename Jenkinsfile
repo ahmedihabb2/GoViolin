@@ -1,26 +1,22 @@
 pipeline{
     agent any
-    tools {
-        go 'Go-v1.18.2'
-    }
     environment {
         DOCKER_IMAGE = "ahmedihab/goviolin"
         DOCKER_TAG = "latest"
-        GO114MODULE = 'on'
-        CGO_ENABLED = 0 
-        GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
+        root = tool type: 'go', name: 'Go-v1.18.2'
         }
     stages {
         stage ('Run Go tests') {
             steps{
                 echo "============Running go tests==========="
-                withEnv(["PATH+GO=${GOPATH}/bin"]) {
+                withEnv(["GOROOT=${root}","PATH+GO=${GOPATH}/bin"]) {
                     sh """
                         go version
                         go mod init github.com/Rosalita/GoViolin
                         go mod tidy
                         go mod vendor
                         go test  ./...
+                        rm go.mod
                     """     
                 }
                 }
