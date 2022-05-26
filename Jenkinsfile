@@ -3,11 +3,11 @@ pipeline{
     environment {
         DOCKER_IMAGE = "ahmedihab/goviolin"
         DOCKER_TAG = "latest"
+        root = tool type: 'go', name: 'Go-v1.18.2'
         }
     stages {
         stage ('Run Go tests') {
             steps{
-                def root = tool type: 'go', name: 'Go-v1.18.2'
                 echo "Running go tests"
                 withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
                     sh 'go mod init '
