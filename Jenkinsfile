@@ -6,14 +6,15 @@ pipeline{
     environment {
         DOCKER_IMAGE = "ahmedihab/goviolin"
         DOCKER_TAG = "latest"
-        GO111MODULE = 'on'
-        root = tool type: 'go', name: 'Go-v1.18.2'
+        GO114MODULE = 'on'
+        CGO_ENABLED = 0 
+        GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
         }
     stages {
         stage ('Run Go tests') {
             steps{
                 echo "Running go tests"
-                withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
+                withEnv(["PATH+GO=${GOPATH}/bin"]) {
                     sh """
                         go version
                         go mod init 
