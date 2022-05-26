@@ -15,6 +15,7 @@ pipeline{
                 echo "============Running go tests==========="
                 withEnv(["PATH+GO=${GOPATH}/bin"]) {
                     sh """
+                        rm go.mod
                         go version
                         go mod init github.com/Rosalita/GoViolin
                         go mod tidy
