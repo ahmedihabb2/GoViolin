@@ -12,6 +12,7 @@ pipeline{
     stages {
         stage ('Run Go tests') {
             steps{
+                echo "Running go tests"
                sh 'go mod init '
                 sh 'go mod tidy'
                 sh 'go mod vendor'
