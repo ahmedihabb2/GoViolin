@@ -16,7 +16,6 @@ pipeline{
                 withEnv(["PATH+GO=${GOPATH}/bin"]) {
                     sh """
                         go mod tidy 
-                        go version
                         go test  ./...
                     """     
                 }
@@ -34,6 +33,7 @@ pipeline{
 
         stage ('Build Dockerfile'){
             steps{
+                echo "============Building Dockerfile==========="
             sh 'docker build -t $DOCKER_IMAGE:$DOCKER_TAG .'
             }
         post {
@@ -49,6 +49,7 @@ pipeline{
 
         stage ('Push Docker image'){
             steps{
+                echo "============Pushing Docker image==========="
              withCredentials([usernamePassword(credentialsId: 'Dockersecret', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')])
                 {
                 sh """
@@ -68,6 +69,21 @@ pipeline{
         }
         }
 
+
+    }
+    post {
+        success {
+            echo "Pipeline completed successfully"
+            mail to: "ahmedbaz14@gmail.com",
+            subject: "GoViolin Pipeline",
+            body: "Pipeline completed successfully"
+        }
+        failure {
+            echo "Pipeline failed"
+            mail to: "ahmedbaz14@gmail.com",
+            subject: "GoViolin Pipeline",
+            body: "Pipeline failed ... Please Check logs"
+        }
 
     }
 }
